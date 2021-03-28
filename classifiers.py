@@ -12,7 +12,6 @@ class Classifier:
     
     # Initialization
     def __init__(self, clsifier):
-        #Preprocessing.super().__init__(X_train, y_train)
         self.clsifier = clsifier
     
     # Random Forest Classifier    
