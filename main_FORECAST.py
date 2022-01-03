@@ -12,7 +12,7 @@ import os
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 
-PATH = './data/'
+PATH = 'DIRECTROY OF THE FILE'
 names = os.listdir(PATH)
 
 Multi_dic = {}
@@ -27,8 +27,8 @@ for filename in names:
     dataset = file.data(file.datafile)
         
     # Independent and Dependent variable
-    X = dataset.iloc[:,1:3].values
-    y = dataset.iloc[:,-1].values
+    X = dataset.iloc[:,1:3].values # SELECT INDEPENDENT VARIABLES // NOTE: THE SIZE OF INDEPENDENT VARIABLE DEPENDS ON THE DATA.
+    y = dataset.iloc[:,-1].values # SELECT DEPEENDENT VARIABLES // NOTE: THE SIZE OF DEPENDENT VARIABLE DEPENDS ON THE DATA.
     y = y.reshape(len(y), 1)
     
     # Split Dataset into train & test data
