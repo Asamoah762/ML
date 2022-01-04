@@ -24,7 +24,7 @@ class Regression:
         pickle.dump(regressor, open(filename, 'wb'))
         return regressor
          
-        
+    # Polynomial Regression Model    
     def Polynomial_RM(X_train, y_train, X_test, degree = 2):
         from sklearn.preprocessing import PolynomialFeatures
         from sklearn.linear_model import LinearRegression
@@ -37,6 +37,7 @@ class Regression:
         pickle.dump(regressor, open(filename, 'wb'))
         return regressor, X_test_poly
     
+    # Support Vector Regression Model
     def SVR_RM(X_train, y_train, kernel = 'rbf'):
         from sklearn.svm import SVR
         regressor = SVR(kernel = kernel)
@@ -45,6 +46,7 @@ class Regression:
         pickle.dump(regressor, open(filename, 'wb'))
         return regressor
     
+    # Decision Tree Regression Model
     def DecisionTree_RM(X_train, y_train):
         from sklearn.tree import DecisionTreeRegressor
         regressor = DecisionTreeRegressor(random_state = 0)
@@ -53,6 +55,7 @@ class Regression:
         pickle.dump(regressor, open(filename, 'wb'))
         return regressor
     
+    # Random Forest Regression Model
     def RandomForest_RM(X_train, y_train):
         from sklearn.ensemble import RandomForestRegressor
         regressor = RandomForestRegressor(n_estimators= 50, random_state=0)
@@ -61,6 +64,7 @@ class Regression:
         pickle.dump(regressor, open(filename, 'wb'))
         return regressor
     
+    # Regression and Prediction
     def RegressionModels_Predict(X_train, X_test, y_train):
         # Regression models
         Multi_regressor = Regression.Multiple_RM(X_train, y_train)
