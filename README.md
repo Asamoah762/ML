@@ -5,7 +5,7 @@ using the bag-of-words model(classification) for basic task in sentiment analysi
 
 # Machine-learning(ML)-for-forecasting
 Applied different types of regression models in Scikit-Learn to determine 
-which of the regression models performs better in forecasting space weather data
+which of the regression models performs better in forecasting space weather data.
 
 # "Classification models":
 1. Random Forest Classifier
