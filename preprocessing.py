@@ -31,8 +31,9 @@ class Preprocessing:
         return X_train, X_test, y_train, y_test 
     
     # function to standardize features by removing the mean and scaling to unit variance   
-    def StdScaler(X, y):
-        X_train, X_test,__ , _ = Preprocessing.datasplit(X, y, test_size = 0.2, random_state = 0)
+    def StdScaler(X_train, y_train):
         sc = StandardScaler()
         X_train = sc.fit_transform(X_train)
-        X_test = sc.fit_transform(X_test)
+        y_train = sc.fit_transform(y_train)
+        return X_train, y_train
+        

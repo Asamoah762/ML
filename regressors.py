@@ -6,7 +6,8 @@ Created on Mon Jan  3 01:13:36 2022
 @author: eric
 """
 
-import sklearn
+#from preprocessing import Preprocessing
+import pickle
 
 class Regression:
     
@@ -18,7 +19,11 @@ class Regression:
     def Multiple_RM(X_train, y_train):
         from sklearn.linear_model import LinearRegression
         regressor = LinearRegression()
-        return regressor.fit(X_train, y_train)
+        filename = 'Multiple_RM.sav'
+        regressor.fit(X_train, y_train)
+        pickle.dump(regressor, open(filename, 'wb'))
+        return regressor
+         
         
     def Polynomial_RM(X_train, y_train, X_test, degree = 2):
         from sklearn.preprocessing import PolynomialFeatures
@@ -27,5 +32,48 @@ class Regression:
         X_poly = poly_reg.fit_transform(X_train)
         X_test_poly = poly_reg.transform(X_test)
         regressor = LinearRegression()
-        return regressor.fit(X_poly,y_train), X_test_poly
+        regressor.fit(X_poly,y_train)
+        filename = 'Polynomial_RM.sav'
+        pickle.dump(regressor, open(filename, 'wb'))
+        return regressor, X_test_poly
+    
+    def SVR_RM(X_train, y_train, kernel = 'rbf'):
+        from sklearn.svm import SVR
+        regressor = SVR(kernel = kernel)
+        regressor.fit(X_train, y_train)
+        filename = 'SuportVector_RM.sav'
+        pickle.dump(regressor, open(filename, 'wb'))
+        return regressor
+    
+    def DecisionTree_RM(X_train, y_train):
+        from sklearn.tree import DecisionTreeRegressor
+        regressor = DecisionTreeRegressor(random_state = 0)
+        regressor.fit(X_train, y_train)
+        filename = 'DecisionTree_RM.sav'
+        pickle.dump(regressor, open(filename, 'wb'))
+        return regressor
+    
+    def RandomForest_RM(X_train, y_train):
+        from sklearn.ensemble import RandomForestRegressor
+        regressor = RandomForestRegressor(n_estimators= 50, random_state=0)
+        regressor.fit(X_train,y_train)
+        filename = 'RandomForest_RM.sav'
+        pickle.dump(regressor, open(filename, 'wb'))
+        return regressor
+    
+    def RegressionModels_Predict(X_train, X_test, y_train):
+        # Regression models
+        Multi_regressor = Regression.Multiple_RM(X_train, y_train)
+        Poly_regressor, X_test_poly = Regression.Polynomial_RM(X_train, y_train, X_test)
+        DecisionTree_regressor = Regression.DecisionTree_RM(X_train, y_train)
+        RandomForest_regressor = Regression.RandomForest_RM(X_train, y_train)
+        SVR_regressor = Regression.SVR_RM(X_train, y_train)
+        
+        # Predictions
+        y_Multi_pred = Multi_regressor.predict(X_test)
+        y_Poly_pred = Poly_regressor.predict(X_test_poly)
+        y_DecisionTree_pred = DecisionTree_regressor.predict(X_test)
+        y_RandomForest_pred = RandomForest_regressor.predict(X_test)
+        y_SVR_pred = SVR_regressor.predict(X_test)
+        return y_Multi_pred, y_Poly_pred, y_DecisionTree_pred, y_RandomForest_pred, y_SVR_pred
         
